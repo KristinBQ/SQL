@@ -1,0 +1,76 @@
+SELECT DISTINCT Category 
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`;
+
+-- Bags, Tops, Jeans, Shoes, Shirts, Skirts, Dresses, Sweaters, Accessories, Jackets & Coats, Pants & Jumpsuits
+
+SELECT COUNT (*) 
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Bags";
+-- 3
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Tops";
+-- 7
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Jeans";
+--2
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Shoes";
+--12
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Shirts";
+--1
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Skirts";
+--3
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Dresses";
+--4
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Sweaters";
+--1
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Accessories";
+--4
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Jackets & Coats";
+--13
+
+SELECT COUNT (*)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+WHERE Category = "Pants & Jumpsuits";
+--3
+
+SELECT Category, SUM(Your_Earnings) AS Earnings
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+GROUP BY Category;
+
+-- Did each category individually then thought, there has got to be an easier way to do this!  And there was. So much faster!
+
+SELECT CATEGORY, COUNT(CATEGORY) AS Number_Sold
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+GROUP BY Category;
+
+-- Then I thought, there has to be a way to combine these queries into one table...and there is!
+
+SELECT CATEGORY, COUNT(CATEGORY) AS Number_Sold,
+SUM(Your_Earnings) AS Earnings
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+GROUP BY Category;
