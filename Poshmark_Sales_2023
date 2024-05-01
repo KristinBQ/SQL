@@ -1,89 +1,31 @@
+#An analysis of my sales on Poshmark, a secondhand clothing resale site
+#Data was downloaded from poshmark.com as a .csv file and uploaded into Google BigQuery for analysis
+
+#1. What are the different categories for clothing?
 SELECT DISTINCT Category 
 FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`;
 
--- Bags, Tops, Jeans, Shoes, Shirts, Skirts, Dresses, Sweaters, Accessories, Jackets & Coats, Pants & Jumpsuits
-
-SELECT COUNT (*) 
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Bags";
--- 3
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Tops";
--- 7
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Jeans";
---2
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Shoes";
---12
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Shirts";
---1
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Skirts";
---3
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Dresses";
---4
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Sweaters";
---1
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Accessories";
---4
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Jackets & Coats";
---13
-
-SELECT COUNT (*)
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-WHERE Category = "Pants & Jumpsuits";
---3
-
-SELECT Category, SUM(Your_Earnings) AS Earnings
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-GROUP BY Category;
-
--- Did each category individually then thought, there has got to be an easier way to do this!  And there was. So much faster!
-
-SELECT CATEGORY, COUNT(CATEGORY) AS Number_Sold
-FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
-GROUP BY Category;
-
--- Then I thought, there has to be a way to combine these queries into one table...and there is!
-
-SELECT CATEGORY, COUNT(CATEGORY) AS Number_Sold,
+#2. SELECT CATEGORY, COUNT(CATEGORY) AS Number_Sold,
 SUM(Your_Earnings) AS Earnings
 FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
 GROUP BY Category;
 
-CATEGORY	Number_Sold	Earnings
-Bags	3	57.11
-Tops	7	94.98
-Jeans	2	42.92
-Shoes	12	487.41
-Shirts	1	16.0
-Skirts	3	43.58
-Dresses	4	54.01
-Sweaters	1	41.6
-Accessories	4	75.65
-Jackets & Coats	13	546.13
-Pants & Jumpsuits	3	92.76
+#3. What were my earnings from each category?
+SELECT Category, SUM(Your_Earnings) AS Earnings
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+GROUP BY Category;
+
+#4. What are my total earnings?
+SELECT SUM(Your_Earnings)
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`;
+
+#5. What category earned the most money?
+SELECT SUM(Your_Earnings) AS total_earnings, Category
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+GROUP BY Category
+ORDER BY total_earnings DESC;
+
+#6. What item was on Poshmark the longest before selling?
+SELECT Listing_Title, Days_on_Poshmark
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+ORDER BY Days_on_Poshmark DESC;
