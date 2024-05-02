@@ -29,3 +29,22 @@ ORDER BY total_earnings DESC;
 SELECT Listing_Title, Days_on_Poshmark
 FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
 ORDER BY Days_on_Poshmark DESC;
+
+#7. What month did I sell the most items?
+SELECT COUNT(*) AS number_sold,
+CASE WHEN Order_Date BETWEEN "2023-01-01" AND "2023-01-31" THEN "January"
+WHEN Order_Date BETWEEN "2023-02-01" AND "2023-02-28" THEN "February"
+WHEN Order_Date BETWEEN "2023-03-01" AND "2023-03-31" THEN "March"
+WHEN Order_Date BETWEEN "2023-04-01" AND "2023-04-30" THEN "April"
+WHEN Order_Date BETWEEN "2023-05-01" AND "2023-05-31" THEN "May"
+WHEN Order_Date BETWEEN "2023-06-01" AND "2023-06-30" THEN "June"
+WHEN Order_Date BETWEEN "2023-07-01" AND "2023-07-31" THEN "July"
+WHEN Order_Date BETWEEN "2023-08-01" AND "2023-08-31" THEN "August"
+WHEN Order_Date BETWEEN "2023-09-01" AND "2023-09-30" THEN "September"
+WHEN Order_Date BETWEEN "2023-10-01" AND "2023-10-31" THEN "October"
+WHEN Order_Date BETWEEN "2023-11-01" AND "2023-11-30" THEN "November"
+WHEN Order_Date BETWEEN "2023-12-01" AND "2023-12-31" THEN "July"
+ELSE "other"
+END AS month_sold
+FROM `data-project-2121983.Poshmark.Poshmark_sales_2023`
+GROUP BY month_sold;
