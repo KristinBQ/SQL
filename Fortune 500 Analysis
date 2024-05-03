@@ -68,6 +68,18 @@ SELECT SUM(revenue) AS total_revenue, industry
 FROM fortune_companies
 WHERE industry = "Energy";
 
+#4. How many companies earned within the following brackets: >=500k, >=400k, >=300k, >=200k, less than 200k?
+SELECT COUNT(company_id) AS num_of_companies,
+CASE WHEN revenue >=500 THEN "500k+"
+WHEN revenue >=400 THEN "400k+"
+WHEN revenue >=300 THEN "300k+"
+WHEN revenue >=200 THEN "200k+"
+ELSE "less than 200k"
+END AS earning_bracket
+FROM fortune_companies
+GROUP BY earning_bracket
+ORDER BY earning_bracket;
+
 #4. How much money did each industry earn?
 SELECT SUM(revenue) AS total_revenue, industry
 FROM fortune_companies
