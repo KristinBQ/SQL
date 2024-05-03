@@ -67,3 +67,8 @@ FROM fortune_companies;
 SELECT SUM(revenue) AS total_revenue, industry
 FROM fortune_companies
 WHERE industry = "Energy";
+
+#4. How much money did each industry earn?
+SELECT SUM(revenue) AS total_revenue, industry
+FROM fortune_companies
+GROUP BY industry;
