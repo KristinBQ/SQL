@@ -99,17 +99,21 @@ FROM fortune_companies
 GROUP BY earning_bracket
 ORDER BY earning_bracket;
 
-#9. SELECT industry, SUM(employees) AS total_employees
+#9. Which industries employee more than 100,000 people?
+SELECT industry, SUM(employees) AS total_employees
 FROM fortune_companies
 GROUP BY industry
 HAVING employees > 100000;
 
-#10. SELECT maternity_leave_weeks, industry
+#10. Which industry offers the most maternity leave?
+SELECT maternity_leave_weeks, industry
 FROM fortune_companies
 GROUP BY industry
 ORDER BY maternity_leave_weeks DESC;
 
-#11. SELECT company_name, industry, revenue, paid_time_off_days
+#11. Which companies make more than 200 billion dollars annually and offer more than 20 vacation days/year?
+SELECT company_name, industry, revenue, paid_time_off_days
 FROM fortune_companies
-WHERE revenue > "200" AND paid_time_off_days > "20"
+WHERE revenue > "200" 
+AND paid_time_off_days > "20"
 ORDER BY paid_time_off_days DESC;
